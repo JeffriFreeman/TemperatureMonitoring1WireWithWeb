@@ -1,0 +1,67 @@
+﻿@page
+@model MonitoringWeb.Pages.Sensors.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<form>
+    <p>
+        Number: <input type="text" name="SearchString">
+        Mount: <select asp-for="Mount" asp-items="Model.Mounts">
+              <option value="">All</option>
+             </select>
+
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SensorsTemp[0].Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SensorsTemp[0].Tempreture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SensorsTemp[0].Mount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SensorsTemp[0].CRC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SensorsTemp[0].LastGet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SensorsTemp) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tempreture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CRC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastGet)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                <a asp-page="./SensorChart" asp-route-id="@item.Id">Chart</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
